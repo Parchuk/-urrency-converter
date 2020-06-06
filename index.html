@@ -240,36 +240,53 @@
         getRate(url)
         .then(data => {
             printCourse(data)
-            $('.currency-calc').addEventListener('input', e => {
-            let flag
-            if ($('#sale').checked)flag = 'buy'
-            else flag = 'sale'
-                for(input of $$('input[type="number"]')){
-                      if ( input != e.target){
-                          data.forEach( arr => {
-                            if (input.name == arr.ccy && e.target.name == 'UAH'){
-                                input.value = (e.target.value / arr[flag]).toFixed(2)
-                            }
-                            if (e.target.name != 'UAH' ){
-                                if (e.target.name == arr.ccy){
-                                    $('input[name="UAH"]').value = (e.target.value * arr[flag]).toFixed(2)
-                                    let sum = e.target.value * arr[flag]
-                                    count = value => {
-                                        data.forEach(arr => {
-                                            if (input.name == arr.ccy){
-                                                sum = value / arr.buy
-                                            }
-                                       })
-                                    }
-                                    count(sum)
-                                   input.value = sum.toFixed(2)
-                                }
-                            }
-                          })
-                      }
-                }
-        })
+           
+                let currencyCalc = e => {    
+                    let flag
+                    $('#sale').checked ? flag = 'buy' : flag = 'sale'
 
+                        for(input of $$('input[type="number"]')){
+                            if ( input != e.target){
+                                data.forEach( arr => {
+                                    if (input.name == arr.ccy && e.target.name == 'UAH'){
+                                        input.value = (e.target.value / arr[flag]).toFixed(2)
+                                    }
+                                    if (e.target.name != 'UAH' ){
+                                        if (e.target.name == arr.ccy){
+                                            $('input[name="UAH"]').value = (e.target.value * arr[flag]).toFixed(2)
+                                            let sum = e.target.value * arr[flag]
+                                            count = value => {
+                                                data.forEach(arr => {
+                                                    if (input.name == arr.ccy){
+                                                        sum = value / arr.buy
+                                                    }
+                                            })
+                                            }
+                                            count(sum)
+                                        input.value = sum.toFixed(2)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                } 
+                    $('.currency-calc').addEventListener('input', e => {
+                        currencyCalc(e)
+                        $('.currency-calc').addEventListener('click', currencyCalc)      
+                })
+                
+                //     $$('.status input[type="radio"').forEach(inputRadio => {
+                //            inputRadio.addEventListener('click', currencyCalc())
+                // })
+                    let value = ''
+                    $('.currency-calc').addEventListener('click', e => {
+                         if (e.target.tagName == 'INPUT'){
+                                e.target.addEventListener('blur', e => {
+                                 value = e.target.value
+                            })
+                            e.target.value = value
+                         }
+                    })
         })
         .catch(err => console.log(err))
         
@@ -286,6 +303,37 @@
                 $('.table-currency').innerHTML += `<p>${elm.ccy} <span>${elm.base_ccy}</span><span class="buy"> ${buy}</span><span class="sale"> ${sale}</span></p>`
             })
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//         window.addEventListener('click', function(){
+
+//     navigator.geolocation.getCurrentPosition(position => {
+    
+//     var lat = position.coords.latitude
+//     var lng = position.coords.longitude
+//     console.log(position)
+// });
+
+// });
+// https://nominatim.openstreetmap.org/reverse?format=json&lat=50.6203096&lon=26.2270006
     </script>
 </body>
 </html>
