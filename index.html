@@ -240,29 +240,28 @@
         getRate(url)
         .then(data => {
             printCourse(data)
-           
+                let currentTarget
                 let currencyCalc = e => {    
                     let flag
+                    if (e.target.type != 'radio') currentTarget = e.target
                     $('#sale').checked ? flag = 'buy' : flag = 'sale'
 
                         for(input of $$('input[type="number"]')){
-                            if ( input != e.target){
+                            if ( input != currentTarget){
                                 data.forEach( arr => {
-                                    if (input.name == arr.ccy && e.target.name == 'UAH'){
-                                        input.value = (e.target.value / arr[flag]).toFixed(2)
+                                    if (input.name == arr.ccy && currentTarget.name == 'UAH'){
+                                        input.value = (currentTarget.value / arr[flag]).toFixed(2)
                                     }
-                                    if (e.target.name != 'UAH' ){
-                                        if (e.target.name == arr.ccy){
-                                            $('input[name="UAH"]').value = (e.target.value * arr[flag]).toFixed(2)
-                                            let sum = e.target.value * arr[flag]
+                                    if (currentTarget.name != 'UAH' ){
+                                        if (currentTarget.name == arr.ccy){
+                                            $('input[name="UAH"]').value = (currentTarget.value * arr[flag]).toFixed(2)
+                                            let sum = currentTarget.value * arr[flag]
                                             count = value => {
                                                 data.forEach(arr => {
-                                                    if (input.name == arr.ccy){
-                                                        sum = value / arr.buy
-                                                    }
-                                            })
+                                                        if (input.name == arr.ccy) sum = value / arr.buy
+                                                })
                                             }
-                                            count(sum)
+                                        count(sum)
                                         input.value = sum.toFixed(2)
                                         }
                                     }
@@ -273,11 +272,10 @@
                     $('.currency-calc').addEventListener('input', e => {
                         currencyCalc(e)
                         $('.currency-calc').addEventListener('click', currencyCalc)      
-                })
+                     })
                 
-                //     $$('.status input[type="radio"').forEach(inputRadio => {
-                //            inputRadio.addEventListener('click', currencyCalc())
-                // })
+                    $$('.status input[type="radio"').forEach(inputRadio => inputRadio.addEventListener('click', currencyCalc))
+
                     let value = ''
                     $('.currency-calc').addEventListener('click', e => {
                          if (e.target.tagName == 'INPUT'){
