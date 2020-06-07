@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
-        body{
+
+        body {
             background-color: rgba(0, 0, 0, .4);
             font-family: 'Montserrat', sans-serif;
         }
-        .currency-converter > div > div:first-of-type {
-            height: 100px;
+
+        .currency-converter>div>div:first-of-type {
+            position: absolute;
+            top: 20px;
         }
-        .currency-converter > div > div:last-of-type{
+
+        .currency-converter>div>div:last-of-type {
             display: flex;
         }
-        .currency-converter > div > div > div:last-of-type{
-            width: 60%;
-            flex-grow: 1;
 
+        .currency-converter>div>div>div:last-of-type {
+            flex-grow: 1;
         }
-        .currency-converter > div > div > div{
-            width: 40%;
+
+        .currency-converter>div>div>div:not(.wrap) {
+            width: 45%;
         }
-        .currency-converter > div{
+
+        .currency-converter>div {
             z-index: 1;
             width: 100%;
             height: 100%;
+            position: relative;
         }
-        .currency-converter{
-            width: 700px;
-            height: 300px;
+
+        .currency-converter {
+            width: 550px;
             margin: 130px auto;
             border-radius: 10px;
-            background-image:url(img/bg.jpeg);
+            background-image: url(img/bg.jpg);
             background-repeat: no-repeat;
             background-size: 100% 100%;
-            border-radius:10px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 0 20px 20px 20px;
             position: relative;
             display: flex;
         }
-        .currency-converter::before{
+
+        .currency-converter::before {
             display: block;
             content: '';
             background-color: rgba(0, 0, 0, .4);
@@ -57,55 +65,63 @@
             position: absolute;
             border-radius: 10px;
         }
-        .currency-calc{
+
+        .currency-calc {
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
+            justify-content: flex-end;
         }
-        .currency-calc label{
+
+        .currency-calc label {
             display: flex;
             background-color: rgba(255, 255, 255, 0.2);
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-top: 20px;
             font-size: 15px;
-            padding: 5px 10px;
-            border-radius: 10px 0 0 0 ;
+            padding: 0 10px 0 0;
+            border-radius: 10px 0 0 10px;
             color: white;
 
         }
-        .currency-calc label input{
+
+        .currency-calc label input {
             background-color: transparent;
             border: none;
             outline: none;
             width: 100%;
             text-align: right;
-            padding:  0 5px;
+            padding: 0 5px;
             font-size: 15px;
             color: white;
             font-family: 'Montserrat', sans-serif;
             cursor: pointer;
         }
-       
-        .currency-calc label input::placeholder{
+
+        .currency-calc label input::placeholder {
             color: white;
         }
+
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
-             -webkit-appearance: none;
-             margin: 0;
+            -webkit-appearance: none;
+            margin: 0;
         }
+
         .table-currency {
             color: white;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-end;
             flex-direction: column;
             box-sizing: border-box;
+            margin: 0;
 
         }
+
         .table-currency p {
-            width: 290px;
+            width: 220px;
             padding: 8px;
             display: flex;
             justify-content: space-between;
@@ -113,43 +129,44 @@
             border-left: 1px solid rgba(255, 255, 255, 0.5);
             background-color: rgba(0, 0, 0, .4);
         }
-        .table-currency p span:not(:first-of-type){
+
+        .table-currency p span:not(:first-of-type) {
             position: relative;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
-        .table-currency p span:nth-of-type(3){
-            margin-left:10px;
-        }
-        .table-currency p span:nth-of-type(1){
-            opacity: .5;
-            margin-right: 40px;
+
+        .table-currency p span:nth-of-type(3) {
+            margin-left: 10px;
         }
 
-        .table-currency p:first-of-type .sale::before{
+        .table-currency p span:nth-of-type(1) {
+            color: rgba(130, 129, 145, 0.7);
+            margin-right: 30px;
+        }
+
+        .table-currency p:first-of-type .sale::before {
             top: -35px;
-            content:'Sale';
+            content: 'Sale';
             position: absolute;
             right: 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 5px;
-        }
-        .table-currency p:first-of-type .buy::before{
-            top: -35px;
-            content:'Buy';
-            position: absolute;
-            right: 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(43, 109, 84, 0.5);
             padding: 5px;
         }
 
-        .currency-converter > div > div:first-of-type{
-            display: flex;
-            align-items: flex-end; 
+        .table-currency p:first-of-type .buy::before {
+            top: -35px;
+            content: 'Buy';
+            position: absolute;
+            right: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            background-color: rgba(43, 109, 84, 0.5);
+            padding: 5px;
         }
+
+
         .status .sale-int,
-        .status .buy-int{
+        .status .buy-int {
             width: 13px;
             height: 13px;
             background-color: rgba(255, 255, 255, 0.6);
@@ -157,35 +174,185 @@
             border-radius: 50%;
             display: flex;
             justify-content: center;
-            align-items: center;   
-            margin-left: 10px; 
-            border: 1px solid ;  
-            transition: .5s;  
+            align-items: center;
+            margin-left: 10px;
+            border: 1px solid;
+            transition: .5s;
         }
+
         .status .sale-int {
             margin-right: 20px;
         }
+
         .status label {
             cursor: pointer;
             color: white;
+            transition: .5s;
         }
-        input[type="radio"]{
+
+        input[type="radio"] {
             display: none;
         }
-        .status{
+
+        .status {
             display: flex;
-            padding-left: 150px;
             padding-bottom: 15px;
         }
-        input[type="radio"]:checked + label {
-            background-color: rgb(42, 128, 38);
+
+        input[type="radio"]:checked+label {
+            background-color: rgba(43, 109, 84, 0.5);
+        }
+
+        .currency-converter .currency-calc label {
+            transform: scale(1);
+            transition: .5s;
+            border: .5px solid transparent;
+            background: rgba(255, 255, 255, 0.2);
+            border: .4px solid rgba(218, 218, 218, 0.5);
+        }
+
+        .currency-converter .currency-calc .inputActive {
+            transition: .5s;
+            transform: scale(1.06);
+            background: rgb(45, 91, 92);
+            background: linear-gradient(0deg, rgba(34, 52, 53, .8) 33%, rgba(35, 88, 104, 0.305) 100%);
+        }
+
+        .currency-converter .currency-calc .inputActive span {
+            margin-left: 0;
+        }
+
+        .currency-converter .currency-calc label span {
+            background-color: rgba(43, 109, 84, 0.5);
+            padding: 4px;
+            font-size: 12px;
+            border-radius: 40%;
+            box-sizing: border-box;
+            transition: .5s;
+            box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .table-currency .container-img {
+            margin-bottom: 20px;
+        }
+
+        .table-currency .container-img img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 0 0 0;
+            box-sizing: border-box;
+        }
+        .currency-converter .date {
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            font-size: 14px;
+            display: block;
+            padding: 0 0 25px 0;
+        }
+        .wrap {
+            -webkit-perspective: 500px;
+            -ms-perspective: 500px;
+            perspective: 500px;
+            -webkit-perspective-origin: 50% 50%;
+            -ms-perspective-origin: 50% 50%;
+            perspective-origin: 50% 50%;
+            float: left;
+            margin: 0 5px 60px 0;
+            opacity: .4;
+        }
+
+        .cube {
+            position: relative;
+            margin: 20px;
+            width: 40px;
+            height: 40px;
+            -webkit-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            padding: 5px 3px;
+            font-size: 16px;
+            text-align: center;
+            border: solid 1px rgba(11, 84, 56, 0.5);
+        }
+
+        .front {
+            -webkit-transform: translateZ(23px);
+            -ms-transform: translateZ(23px);
+            transform: translateZ(23px);
+            background: #fff;
+        }
+
+        .back {
+            -webkit-transform: translateZ(-23px) rotateY(-180deg);
+            -ms-transform: translateZ(-23px) rotateY(-180deg);
+            transform: translateZ(-23px) rotateY(-180deg);
+            background: #fff;
+        }
+
+        .left {
+            -webkit-transform: translateX(-23px) rotateY(-90deg);
+            -ms-transform: translateX(-23px) rotateY(-90deg);
+            transform: translateX(-23px) rotateY(-90deg);
+            background: #fff;
+        }
+
+        .rght {
+            -webkit-transform: translateX(23px) rotateY(90deg);
+            -ms-transform: translateX(23px) rotateY(90deg);
+            transform: translateX(23px) rotateY(90deg);
+            background: #fff;
+        }
+
+        .rotate-y {
+            -webkit-animation: spinY 20s infinite linear;
+            -ms-animation: spinY 20s infinite linear;
+            animation: spinY 20s infinite linear;
+        }
+
+        @-webkit-keyframes spinY {
+            from {
+                -webkit-transform: rotateY(0);
+                -ms-transform: rotateY(0);
+                transform: rotateY(0);
+            }
+
+            to {
+                -webkit-transform: rotateY(360deg);
+                -ms-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+            }
+        }
+
+        @keyframes spinY {
+            from {
+                -webkit-transform: rotateY(0);
+                -ms-transform: rotateY(0);
+                transform: rotateY(0);
+            }
+
+            to {
+                -webkit-transform: rotateY(360deg);
+                -ms-transform: rotateY(360deg);
+                transform: rotateY(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="currency-converter">
         <div>
             <div>
+                <span class="date"></span>
                 <div class="status">
                     <label for="sale">Sale</label>
                     <input name="radio" type="radio" id="sale" checked>
@@ -196,28 +363,49 @@
                 </div>
             </div>
             <div>
+
                 <div class="currency-calc">
                     <label>
-                        UAH
+                        <span>UAH</span>
                         <input name="UAH" type="number" placeholder="0">
                     </label>
                     <label>
-                        USD
+                        <span>USD</span>
                         <input name="USD" type="number" placeholder="0">
                     </label>
                     <label>
-                        EUR
+                        <span>EUR</span>
                         <input name="EUR" type="number" placeholder="0">
                     </label>
                     <label>
-                        RUB
+                        <span>RUB</span>
                         <input name="RUB" type="number" placeholder="0">
                     </label>
 
                 </div>
+
                 <div class="table-currency">
-                   
+                    <div id="wrap" class="wrap">
+                        <div class="cube">
+                            <div id="cube" class="cube rotate-y">
+
+                                <div class="container-img face back">
+                                    <img src="img/logo.png" alt="logoPrivatBank">
+                                </div>
+                                <div class="container-img face front">
+                                    <img src="img/logo.png" alt="logoPrivatBank">
+                                </div>
+                                <div class="container-img face left">
+                                    <img src="img/logo.png" alt="logoPrivatBank">
+                                </div>
+                                <div class="container-img face rght">
+                                    <img src="img/logo.png" alt="logoPrivatBank">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -285,6 +473,17 @@
                             e.target.value = value
                          }
                     })
+
+                        $('.currency-calc').addEventListener('click', e => {
+                            if (e.target.tagName == 'INPUT') {
+                                $$('input[type="number"]').forEach( input => {
+                                    e.target.parentElement.style.transition = '.5s'
+                                     input.parentElement.classList.add('inputActive')
+                                     e.target.parentElement.classList.remove('inputActive')
+                                } )
+
+                            }
+                        })
         })
         .catch(err => console.log(err))
         
@@ -302,24 +501,7 @@
             })
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $('.date').innerHTML = new Date()
 
 //         window.addEventListener('click', function(){
 
